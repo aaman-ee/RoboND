@@ -130,10 +130,7 @@ def perception_step(Rover):
     # Update Rover pixel distances and angles
     Rover.nav_dists = rover_centric_pixel_distances
     Rover.nav_angles = rover_centric_angles
-    
- 
-    
-    
+        
     return Rover
 ````
 ![alt text][image2]
