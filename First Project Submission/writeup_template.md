@@ -39,7 +39,7 @@ You're reading it!
 ### Notebook Analysis
 #### 1. Run the functions provided in the notebook on test images (first with the test data provided, next on data you have recorded). Add/modify functions to allow for color selection of obstacles and rock samples.
 
-In the notebook I modified the color_thresh() function, in the perception.py I used three functions.
+In the notebook I modified the `color_thresh()` function, in the `perception.py` I used three functions.
 The test_mapping.mp4 is in the current folder.
 
 ```
