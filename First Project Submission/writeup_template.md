@@ -74,9 +74,68 @@ plt.imshow(threshed, cmap='gray')
 
 ![alt text][image1]
 
-#### 1. Populate the `process_image()` function with the appropriate analysis steps to map pixels identifying navigable terrain, obstacles and rock samples into a worldmap.  Run `process_image()` on your test data using the `moviepy` functions provided to create video output of your result. 
-And another! 
+#### 2. Populate the `process_image()` function with the appropriate analysis steps to map pixels identifying navigable terrain, obstacles and rock samples into a worldmap.  Run `process_image()` on your test data using the `moviepy` functions provided to create video output of your result. 
+````
+def perception_step(Rover):
+    # Perform perception steps to update Rover()
+    # TODO: 
+    # NOTE: camera image is coming to you in Rover.img
+    # 1) Define source and destination points for perspective transform
+    dst_size = 5
+    bottom_offset = 6
+    source = np.float32([[14, 140], [301, 140], [200, 96], [118, 96]])
+    destination = np.float32([[Rover.img.shape[1] / 2 - dst_size, Rover.img.shape[0] - bottom_offset],
+                              [Rover.img.shape[1] / 2 + dst_size, Rover.img.shape[0] - bottom_offset],
+                              [Rover.img.shape[1] / 2 + dst_size, Rover.img.shape[0] - 2 * dst_size - bottom_offset],
+                              [Rover.img.shape[1] / 2 - dst_size, Rover.img.shape[0] - 2 * dst_size - bottom_offset],
+                              ])
+    # 2) Apply perspective transform
+    warped = perspect_transform(Rover.img, source, destination)
+    # 3) Apply color threshold to identify navigable terrain/obstacles/rock samples
+    threshed = color_thresh(warped)
+    rock_threshed = rock_thresh(warped)
+    obstacle_threshed=obstacle_thresh(warped)
+    # 4) Update Rover.vision_image (this will be displayed on left side of screen)
+    Rover.vision_image[:,:,0] = obstacle_threshed*255
+    Rover.vision_image[:,:,1] = rock_threshed*255
+    Rover.vision_image[:,:,2] = threshed*255
 
+    # 5) Convert map image pixel values to rover-centric coords
+    xpix, ypix = rover_coords(threshed)
+    obxpix, obypix = rover_coords(obstacle_threshed)
+    rockxpix, rockypix = rover_coords(rock_threshed)
+    # 6) Convert rover-centric pixel values to world coordinates
+    rover_xpos = Rover.pos[0]
+    rover_ypos = Rover.pos[1]
+    rover_yaw = Rover.yaw
+    worldmap = Rover.worldmap
+    scale = 10
+    x_world, y_world = pix_to_world(xpix, ypix, rover_xpos,
+                                rover_ypos, rover_yaw,
+                                worldmap.shape[0], scale)
+
+    obstacle_x_world, obstacle_y_world = pix_to_world(obxpix, obypix, rover_xpos,
+                                rover_ypos, rover_yaw,
+                                worldmap.shape[0], scale)
+    rock_x_world, rock_y_world = pix_to_world(rockxpix, rockypix, rover_xpos,
+                                rover_ypos, rover_yaw,
+                                worldmap.shape[0], scale)
+    # 7) Update Rover worldmap (to be displayed on right side of screen)
+    Rover.worldmap[obstacle_y_world, obstacle_x_world, 0] += 1
+    Rover.worldmap[rock_y_world, rock_x_world, 1] += 1
+    Rover.worldmap[y_world, x_world, 2] += 1
+
+    # 8) Convert rover-centric pixel positions to polar coordinates
+    rover_centric_pixel_distances, rover_centric_angles = to_polar_coords(xpix, ypix)
+    # Update Rover pixel distances and angles
+    Rover.nav_dists = rover_centric_pixel_distances
+    Rover.nav_angles = rover_centric_angles
+    
+ 
+    
+    
+    return Rover
+````
 ![alt text][image2]
 ### Autonomous Navigation and Mapping
 
