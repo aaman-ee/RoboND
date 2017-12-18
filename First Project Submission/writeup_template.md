@@ -200,6 +200,125 @@ def perception_step(Rover):
     
 Here I used three functions `color_thresh`, `obstacle_thresh` and `rock_thresh` for identifying navigable terrain/obstacles/rock samples, respectively. Their warped output was used to update the `Rover.vision_image` in the three different color channels. All terrain/obstacles/rock pixels were converted to rover centric and then to world centric coordinates for updating the worldmap.
 Finally the `Rover.nav_dists` and `Rover.nav_angles` were updated for use in the new upcoming Rover image.
+
+````
+def decision_step(Rover):
+
+    # Implement conditionals to decide what to do given perception data
+    # Here you're all set up with some basic functionality but you'll need to
+    # improve on this decision tree to do a good job of navigating autonomously!
+    # Check if we have been stuck
+
+    #int(Rover.pos[0])
+    #int(Rover.pos[1])
+    Rover.q.append([round(Rover.pos[0],1),round(Rover.pos[1],1),int(Rover.yaw)])
+    print(Rover.q)
+    #print(Rover.q.count([round(Rover.pos[0],1),round(Rover.pos[1],1),int(Rover.yaw)]))
+    if Rover.q.count([round(Rover.pos[0],1),round(Rover.pos[1],1),int(Rover.yaw)]) >= 15 and Rover.laststeer == 'right':
+        Rover.throttle = 0
+        Rover.brake = 0
+        Rover.steer = 15
+        Rover.mode = 'stacked'
+        print('Stached1')
+
+    if Rover.q.count([round(Rover.pos[0], 1), round(Rover.pos[1], 1), int(Rover.yaw)]) >= 15 and Rover.laststeer == 'left':
+        Rover.throttle = 0
+        Rover.brake = 0
+        Rover.steer = -15
+        Rover.mode = 'stacked'
+        print('Stacked2')
+
+    if Rover.q.count([round(Rover.pos[0], 1), round(Rover.pos[1], 1), int(Rover.yaw)]) < 15:
+        Rover.mode = 'forward'
+
+
+
+    # Example:
+    # Check if we have vision data to make decisions with
+    if Rover.nav_angles is not None:
+        # Check for Rover.mode status
+        if Rover.mode == 'forward': 
+            # Check the extent of navigable terrain
+            if len(Rover.nav_angles) >= Rover.stop_forward:  
+                # If mode is forward, navigable terrain looks good 
+                # and velocity is below max, then throttle 
+                if Rover.vel < Rover.max_vel:
+                    # Set throttle value to throttle setting
+                    Rover.throttle = Rover.throttle_set
+                else: # Else coast
+                    Rover.throttle = 0
+                Rover.brake = 0
+                # Set steering to average angle clipped to the range +/- 15
+                Rover.steer = np.clip(np.mean(Rover.nav_angles * 180/np.pi), -15, 15)
+            # If there's a lack of navigable terrain pixels then go to 'stop' mode
+            elif len(Rover.nav_angles) < Rover.stop_forward:
+                    # Set mode to "stop" and hit the brakes!
+                    Rover.throttle = -0.1
+                    # Set brake to stored brake value
+                    Rover.brake = Rover.brake_set
+                    #Rover.throttle = 0
+                    #Rover.steer = 0
+                    Rover.mode = 'stop'
+
+        # If we're already in "stop" mode then make different decisions
+        elif Rover.mode == 'stop':
+            # If we're in stop mode but still moving keep braking
+            if Rover.vel > 0.2:
+                Rover.throttle = 0
+                Rover.brake = Rover.brake_set
+                Rover.steer = 0
+            # If we're not moving (vel < 0.2) then do something else
+            elif Rover.vel <= 0.2:
+                #Rover.brake = 0
+                # Now we're stopped and we have vision data to see if there's a path forward
+                if len(Rover.nav_angles) < Rover.go_forward:
+                    #Rover.throttle = 0
+                    # Release the brake to allow turning
+                    #Rover.brake = 0
+                    #Rover.throttle = -0.1
+                    print(np.mean(Rover.nav_angles * 180/np.pi))
+                    # Turn range is +/- 15 degrees, when stopped the next line will induce 4-wheel turning
+                    if np.mean(Rover.nav_angles * 180/np.pi)>=-45 or  np.mean(Rover.nav_angles * 180/np.pi)=='nan':
+                        #Rover.throttle = 0
+                        #Rover.brake = Rover.brake_set
+                        Rover.brake = 0
+                        Rover.steer = 15
+                        Rover.laststeer = 'left'
+
+                        #Rover.throttle = -Rover.throttle_set
+                        #Rover.steer = 15 # Could be more clever here about which way to turn
+                    elif np.mean(Rover.nav_angles * 180/np.pi)<-45:
+                         #Rover.throttle = -Rover.throttle_set
+                         #Rover.throttle = 0
+                         #Rover.brake = Rover.brake_set
+                        Rover.brake = 0
+                        Rover.steer = -15
+                        Rover.laststeer = 'right'
+                    else:
+                        if Rover.laststeer == 'right':
+                            Rover.steer = -15
+                        else:
+                            Rover.steer = 15
+
+                # If we're stopped but see sufficient navigable terrain in front then go!
+                if len(Rover.nav_angles) >= Rover.go_forward and Rover.mode !='stacked':
+                    # Set throttle back to stored value
+                    Rover.throttle = Rover.throttle_set
+                    # Release the brake
+                    Rover.brake = 0
+                    # Set steer to mean angle
+                    Rover.steer = np.clip(np.mean(Rover.nav_angles * 180/np.pi), -15, 15)
+                    Rover.mode = 'forward'
+   
+        
+    # If in a state where want to pickup a rock send pickup command
+    if Rover.near_sample and Rover.vel == 0 and not Rover.picking_up:
+        Rover.send_pickup = True
+    
+    return Rover
+ ````
+In the `decision_step()` I introduced one more mode for the Rover 'Stacked' where this mode is initiated when all x,y,yaw values remaing the same for a small period of time. This is achived through `self.q = _collections.deque(maxlen=20)` where I store the last 20 X,y,yaw values and check if more than 15 (rounded) values are the same in the que. 
+When the Rover is stopped and there is enough vision forward data, the turn is based upon the `np.mean(Rover.nav_angles * 180/np.pi)` citeria for turnting left or right. 
     
 #### 2. Launching in autonomous mode your rover can navigate and map autonomously.  Explain your results and how you might improve them in your writeup.  
 
