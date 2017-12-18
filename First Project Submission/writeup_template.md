@@ -324,6 +324,20 @@ When the Rover is stopped and there is enough vision forward data, the turn is b
 
 **Note: running the simulator with different choices of resolution and graphics quality may produce different results, particularly on different machines!  Make a note of your simulator settings (resolution and graphics quality set on launch) and frames per second (FPS output to terminal by `drive_rover.py`) in your writeup when you submit the project so your reviewer can reproduce your results.**
 
+The video output file can be found in the following Dropbox Link:
+https://www.dropbox.com/s/7jgqjbeu3tdwjpt/Rover%20Simulator%2014-Dec-17%205_49_45%20PM.mp4?dl=0
+
+Video and Resolution Settings:
+64-Bit Rover Simulator
+Screen Resolution: 1024x768
+Graphics Quality: Good
+Windowed: Yes
+FPS: 27
+Pick up Rock Routine Implemented: No
+
+The Rover can easily avoid obstacles, map efficiently the world, and has the intelligence to understand if it has been stacked.
+Rocks are identified and located in the worldmap efficiently and the rover can espace from dead-ends. The only drawback is that it might not map the entire world and miss some paths. This could be resolved if we apply a labyrinth concept of always moving with obstacles from one side. This means that the rover should move forward always and close to the rocks in its right (or left) side.  
+
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
 
 
