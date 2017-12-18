@@ -72,7 +72,7 @@ threshed = color_thresh(warped)
 plt.imshow(threshed, cmap='gray')
 ```
 
-![alt text][image1]
+
 
 #### 2. Populate the `process_image()` function with the appropriate analysis steps to map pixels identifying navigable terrain, obstacles and rock samples into a worldmap.  Run `process_image()` on your test data using the `moviepy` functions provided to create video output of your result. 
 ````
@@ -133,7 +133,7 @@ def perception_step(Rover):
         
     return Rover
 ````
-![alt text][image2]
+
 ### Autonomous Navigation and Mapping
 
 #### 1. Fill in the `perception_step()` (at the bottom of the `perception.py` script) and `decision_step()` (in `decision.py`) functions in the autonomous mapping scripts and an explanation is provided in the writeup of how and why these functions were modified as they were.
@@ -317,7 +317,7 @@ def decision_step(Rover):
     
     return Rover
  ````
-In the `decision_step()` I introduced one more mode for the Rover 'Stacked' where this mode is initiated when all x,y,yaw values remaing the same for a small period of time. This is achived through `self.q = _collections.deque(maxlen=20)` where I store the last 20 X,y,yaw values and check if more than 15 (rounded) values are the same in the que. 
+In the `decision_step()` I introduced one more mode for the Rover 'Stacked' where this mode is initiated when all x,y,yaw values remain the same for a small period of time. This is achived through `self.q = _collections.deque(maxlen=20)` where I store the last 20 X,y,yaw values and check if more than 15 (rounded) values are the same in the que. When Stacked flag is initiated, a turn maneuver is applied.
 When the Rover is stopped and there is enough vision forward data, the turn is based upon the `np.mean(Rover.nav_angles * 180/np.pi)` citeria for turnting left or right. 
     
 #### 2. Launching in autonomous mode your rover can navigate and map autonomously.  Explain your results and how you might improve them in your writeup.  
