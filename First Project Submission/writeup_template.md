@@ -71,7 +71,7 @@ def color_thresh(img, rgb_thresh=(160, 160, 160)):
 threshed = color_thresh(warped)
 plt.imshow(threshed, cmap='gray')
 ```
-For path trace the threshold above 160 in all the RGB channels is adequate for finding the travershable path.
+For path trace the threshold above 160 in all the RGB channel pixels is adequate for finding the travershable path.
 ```
 above_thresh = (img[:, :, 0] > rgb_thresh[0]) \
                    & (img[:, :, 1] > rgb_thresh[1]) \
@@ -147,6 +147,39 @@ def perception_step(Rover):
         
     return Rover
 ````
+Firstly, a perpective trasnform is applied in each new Rover.img. Then for each terrain/obstacles/rock the functions `color_thresh(), rock_thresh(),obstacle_thresh()` are performed, respectively to identify terrain/obstacles/rocks.
+Each color channel shows the terrain/obstacles/rocks
+````
+   Rover.vision_image[:,:,0] = obstacle_threshed*255
+    Rover.vision_image[:,:,1] = rock_threshed*255
+    Rover.vision_image[:,:,2] = threshed*255
+````
+Then, for all the  terrain/obstacles/rocks, we perform rover centric trasmformation and then world-centric trasnsormation by
+````
+  xpix, ypix = rover_coords(threshed)
+    obxpix, obypix = rover_coords(obstacle_threshed)
+    rockxpix, rockypix = rover_coords(rock_threshed)
+````
+and
+````
+x_world, y_world = pix_to_world(xpix, ypix, rover_xpos,
+                                rover_ypos, rover_yaw,
+                                worldmap.shape[0], scale)
+
+    obstacle_x_world, obstacle_y_world = pix_to_world(obxpix, obypix, rover_xpos,
+                                rover_ypos, rover_yaw,
+                                worldmap.shape[0], scale)
+    rock_x_world, rock_y_world = pix_to_world(rockxpix, rockypix, rover_xpos,
+                                rover_ypos, rover_yaw,
+                                worldmap.shape[0], scale)
+````
+with the necessary scale for upadating the worldmap.
+````
+ Rover.worldmap[obstacle_y_world, obstacle_x_world, 0] += 1
+    Rover.worldmap[rock_y_world, rock_x_world, 1] += 1
+    Rover.worldmap[y_world, x_world, 2] += 1
+````
+Finally, the Rover pixel distances and angles are updated, for use in the upcoming image.
 
 ### Autonomous Navigation and Mapping
 
