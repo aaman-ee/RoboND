@@ -338,10 +338,7 @@ Pick up Rock Routine Implemented: No
 The Rover can easily avoid obstacles, map efficiently the world, and has the intelligence to understand if it has been stacked.
 Rocks are identified and located in the worldmap efficiently and the rover can espace from dead-ends. The only drawback is that it might not map the entire world and miss some paths. This could be resolved if we apply a labyrinth concept of always moving with obstacles from one side. This means that the rover should move forward always and close to the rocks in its right (or left) side.  
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
 
 
-
-![alt text][image3]
 
 
