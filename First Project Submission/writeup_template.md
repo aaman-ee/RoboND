@@ -26,6 +26,7 @@
 [image2]: ./calibration_images/example_grid1.jpg
 [image3]: ./calibration_images/example_rock1.jpg 
 [image4]: ./misc/vlcsnap-2017-12-18-19h40m47s828.png
+[image5]: ./misc/vlcsnap-2017-12-18-19h46m52s664.png
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/916/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
@@ -388,6 +389,10 @@ Pick up Rock Routine Implemented: No
 
 The Rover can easily avoid obstacles, map efficiently the world, and has the intelligence to understand if it has been stacked.
 Rocks are identified and located in the worldmap efficiently and the rover can espace from dead-ends. The only drawback is that it might not map the entire world and miss some paths. This could be resolved if we apply a labyrinth concept of always moving with obstacles from one side. This means that the rover should move forward always and close to the rocks in its right (or left) side.  
+
+A snapshot of the video output after `drive_rover.py` is shown below:
+
+![alt text][image5]
 
 
 
