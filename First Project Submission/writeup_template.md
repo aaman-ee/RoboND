@@ -25,6 +25,7 @@
 [image1]: ./misc/rover_image.jpg
 [image2]: ./calibration_images/example_grid1.jpg
 [image3]: ./calibration_images/example_rock1.jpg 
+[image4]: ./misc/vlcsnap-2017-12-18-19h40m47s828.png
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/916/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
@@ -180,6 +181,9 @@ with the necessary scale for upadating the worldmap.
     Rover.worldmap[y_world, x_world, 2] += 1
 ````
 Finally, the Rover pixel distances and angles are updated, for use in the upcoming image.
+A snapshot of the notebook output after `moviepy` is shown below:
+
+![alt text](image4)
 
 ### Autonomous Navigation and Mapping
 
