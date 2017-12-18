@@ -183,7 +183,7 @@ with the necessary scale for upadating the worldmap.
 Finally, the Rover pixel distances and angles are updated, for use in the upcoming image.
 A snapshot of the notebook output after `moviepy` is shown below:
 
-![alt text](image4)
+![alt text][image4]
 
 ### Autonomous Navigation and Mapping
 
