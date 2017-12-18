@@ -71,7 +71,21 @@ def color_thresh(img, rgb_thresh=(160, 160, 160)):
 threshed = color_thresh(warped)
 plt.imshow(threshed, cmap='gray')
 ```
-
+For path trace the threshold above 160 in all the RGB channels is adequate for finding the travershable path.
+```
+above_thresh = (img[:, :, 0] > rgb_thresh[0]) \
+                   & (img[:, :, 1] > rgb_thresh[1]) \
+                   & (img[:, :, 2] > rgb_thresh[2])
+```
+All the others are considered as obstacles with the inversion of `below_thresh = np.invert(above_thresh)`.
+For rocks, after an image analysis of the calibration images I ended up to the following thresholds
+```
+   rock_thresh = (img[:, :, 0] < 220) \
+                   & (img[:, :, 0] > 130) \
+                   & (img[:, :, 1] < 180) \
+                   & (img[:, :, 1] > 100) \
+                   & (img[:, :, 2] < 25)
+```
 
 
 #### 2. Populate the `process_image()` function with the appropriate analysis steps to map pixels identifying navigable terrain, obstacles and rock samples into a worldmap.  Run `process_image()` on your test data using the `moviepy` functions provided to create video output of your result. 
