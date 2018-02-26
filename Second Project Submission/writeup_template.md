@@ -4,7 +4,7 @@
 
 [//]: # (Image References)
 
-[image1]: ./misc/image1.jpg
+[image1]: ./misc/image1.jpeg
 [image2]: ./misc_images/misc3.png
 [image3]: ./misc_images/misc2.png
 
