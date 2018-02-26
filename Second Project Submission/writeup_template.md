@@ -10,7 +10,7 @@
 
 
 ### Forward Kinematic Analysis
-#### 1. We first derive the DH table based on the schematic below and the URDF file.
+#### 1. We first derive the DH table based on the schematic below and the `kr210.urdf.xacro` file.
 
 Here is an example of how to include an image in your writeup.
 
