@@ -5,8 +5,8 @@
 [//]: # (Image References)
 
 [image1]: ./misc/image1.jpeg
-[image2]: ./misc_images/misc3.png
-[image3]: ./misc_images/misc2.png
+[image2]: ./misc/project.jpeg
+
 
 
 ### Forward Kinematic Analysis
@@ -104,10 +104,10 @@ theta6 = atan2(R3_6[1,1],-R3_6[1,0])
 
 #### 1. Fill in the `IK_server.py` file with properly commented python code for calculating Inverse Kinematics based on previously performed Kinematic Analysis. Your code must guide the robot to successfully complete 8/10 pick and place cycles. Briefly discuss the code you implemented and your results. 
 
-The code is attached in the github folder, my code run quite efficiently, I had two objects lost (8/10), because I pressed quickly the button "next" during the grapsing object routine, and the gripper hasn't grabed the object.
+The code is attached in the github folder, my code run quite efficiently, I had one object lost (9/10), because I pressed quickly the button "next" during the grapsing object routine, and the gripper hasn't grabed the object.
 The code needed some time for the IK calculation.
 
 
-And just for fun, another example image:
-![alt text][image3]
+The required completed project screenshot:
+![alt text][image2]
 
