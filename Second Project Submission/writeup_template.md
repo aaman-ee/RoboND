@@ -8,18 +8,9 @@
 [image2]: ./misc_images/misc3.png
 [image3]: ./misc_images/misc2.png
 
-## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
-### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
 
----
-### Writeup / README
-
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  
-
-You're reading it!
-
-### Kinematic Analysis
-#### 1. Run the forward_kinematics demo and evaluate the kr210.urdf.xacro file to perform kinematic analysis of Kuka KR210 robot and derive its DH parameters.
+### Forward Kinematic Analysis
+#### 1. We first derive the DH table based on the schematic below and the URDF file.
 
 Here is an example of how to include an image in your writeup.
 
