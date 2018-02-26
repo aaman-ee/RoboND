@@ -49,11 +49,56 @@ Finally, we apply a corection as proposed to consider the different orientation 
   T0_7_corr = (T0_7 * R_corr)
 ```
 
-#### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
+#### 3. Inverse Kinematics Analysis.
 
-And here's where you can draw out and show your math for the derivation of your theta angles. 
+Since we have a special case of three last joints revolute with their joint axes intersecting at a single point, we can decouple the IK problem into Inverse Position and Inverse Orientation problems for the wrist center (WC).
+The end-effector position and orientation are retrieved by the functions already provided.
 
-![alt text][image2]
+We need the rotation matrix for the end-effector along with a correction:
+
+```
+ # Roll
+        ROT_x = Matrix([[       1,       0,       0],
+                        [       0,  cos(r), -sin(r)],
+                        [       0,  sin(r),  cos(r)]])
+        # Pitch
+        ROT_y = Matrix([[  cos(p),       0,  sin(p)],
+                        [       0,       1,       0],
+                        [ -sin(p),       0,  cos(p)]])
+        # Yaw
+        ROT_z = Matrix([[  cos(y), -sin(y),       0],
+                        [  sin(y),  cos(y),       0],
+                        [       0,       0,       1]])
+
+        ROT_EE = ROT_z * ROT_y * ROT_x
+        
+        ROT_corr = ROT_z.subs(y, 3.1415926535897931) * ROT_y.subs(p, -1.5707963267948966)
+        ROT_EE = ROT_EE * ROT_corr
+```
+We then calculate the WC position
+
+```
+# Calculate WC position
+    WC = EE - (0.303) * ROT_EE[:,2]
+```
+We have the wrist center in WC (Wx, Wy, Wz).
+
+Using trigonometry we calculate theta1, theta2, theta3. With these angles, we can calculate R0_3 and finally R0_6
+```
+            R0_3 = T0_1[0:3,0:3] * T1_2[0:3,0:3] * T2_3[0:3,0:3]
+            R0_3 = R0_3.evalf(subs={q1: theta1, q2: theta2, q3:theta3})
+                        
+            # Get rotation matrix R3_6 from (transpose of R0_3 * R_EE)
+            R3_6 = R0_3.transpose() * ROT_EE
+```
+We finally, get the angles from 
+```
+theta5 = atan2(sqrt(R3_6[0,2]*R3_6[0,2] + R3_6[2,2]*R3_6[2,2]),R3_6[1,2])
+theta4 = atan2(-R3_6[2,2], R3_6[0,2])
+theta6 = atan2(R3_6[1,1],-R3_6[1,0])
+```
+
+
 
 ### Project Implementation
 
