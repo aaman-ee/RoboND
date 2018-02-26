@@ -43,6 +43,11 @@ And then post-multiply to have the homogeneous transform between the base_link a
 ```
  T0_7 = simplify(T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_7)
 ```
+Finally, we apply a corection as proposed to consider the different orientation between URDF and DH
+```
+  R_corr = Matrix([[0,0,1.0,0],[0,-1.0,0,0],[1.0,0,0,0],[0,0,0,1.0]])
+  T0_7_corr = (T0_7 * R_corr)
+```
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 
