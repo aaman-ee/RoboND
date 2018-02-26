@@ -12,7 +12,7 @@
 ### Forward Kinematic Analysis
 #### 1. We first derive the DH table based on the schematic below and the `kr210.urdf.xacro` file.
 
-Here is an example of how to include an image in your writeup.
+We have only revolute joints in our arm so we have theta variables only.
 
 ![alt text][image1]
 
