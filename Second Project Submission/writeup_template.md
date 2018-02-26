@@ -5,7 +5,7 @@
 [//]: # (Image References)
 
 [image1]: ./misc/image1.jpeg
-[image2]: ./misc/project.jpeg
+[image2]: ./misc/project.jpg
 
 
 
