@@ -10,7 +10,7 @@
 
 ## Object Recognition Pipeline
 
-First we train all 8 objects using color and surface normal features. The feature extraction was in the HSV color space for 100 different pose orientations for each object. SVM training with linear kernel was utilized. The confusion matrix reveals adequate recongintion results.
+First we extract features from all 8 objects using color and surface normal features. The feature extraction was in the HSV color space for 100 different pose orientations for each object. SVM training for object recognition with linear kernel was utilized. The confusion matrix reveals adequate recognition results.
 
 
 
