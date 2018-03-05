@@ -16,6 +16,37 @@ First we extract features from all 8 objects using color and surface normal feat
 
 <img src="./misc/figure_1.png" width="425"/> <img src="./misc/figure_2.png" width="425"/> 
 
+Next, and for each world, the following pipeline was used highlighting some important code parts. Note that the same parameters of the code are used for all the three worlds.
+
+A Statistical Outlier Filtering is first applied to the point cloud of the RGB-D camera.
+```
+outlier_filter = pcl_datacloud.make_statistical_outlier_filter()
+outlier_filter.set_mean_k(50)
+x = 1.0
+outlier_filter.set_std_dev_mul_thresh(x)
+cloud_filtered = outlier_filter.filter() 
+```
+Afterwards, a Voxel Grid Downsampling and a PassThrough Filter are applied to work with less data points for time efficiency. I applied two axis filtering for elimination the box outliers
+```
+vox = cloud_filtered.make_voxel_grid_filter()
+LEAF_SIZE = 0.003
+vox.set_leaf_size(LEAF_SIZE, LEAF_SIZE, LEAF_SIZE)
+cloud_filtered = vox.filter()
+passthrough = cloud_filtered.make_passthrough_filter()
+filter_axis = 'z'
+passthrough.set_filter_field_name(filter_axis)
+axis_min = 0.6
+axis_max = 1.1
+passthrough.set_filter_limits(axis_min, axis_max)
+cloud_filtered = passthrough.filter()
+passthrough = cloud_filtered.make_passthrough_filter()  # second filter for passing out drop boxes
+filter_axis = 'x'
+passthrough.set_filter_field_name(filter_axis)
+axis_min = 0.3
+axis_max = 1.0
+passthrough.set_filter_limits(axis_min, axis_max)
+cloud_filtered = passthrough.filter()
+```
 
 ## Results
 
