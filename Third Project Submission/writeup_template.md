@@ -54,11 +54,15 @@ For each world, a yaml file is extracted containing all the necessary details fo
 
 World 1 
 Yaml File: [output_1.yaml](https://github.com/aaman-ee/RoboND/blob/master/Third%20Project%20Submission/output_1.yaml)
+
 Recognized objects: 3/3
 
 ![alt text][image3]
 
-World 2 (Recognized objects 5/5)
+World 2
+Yaml File: [output_2.yaml](https://github.com/aaman-ee/RoboND/blob/master/Third%20Project%20Submission/output_2.yaml)
+
+Recognized objects: 5/5
 
 ![alt text][image4]
 
