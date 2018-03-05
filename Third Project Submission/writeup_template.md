@@ -1,4 +1,4 @@
-## Project: Perception Pick & Place
+# Project: Perception Pick & Place
 
 [//]: # (Image References)
 
@@ -8,14 +8,14 @@
 [image4]: ./misc/world2.png
 [image5]: ./misc/world3.png
 
-# Object Recognition Pipeline
+## Object Recognition Pipeline
 
 
 
 
 
 
-### Results
+## Results
 
 For each world, a yaml file is extracted containing all the necessary details for the pick and place routine.
 
