@@ -75,7 +75,7 @@ label = encoder.inverse_transform(prediction)[0]
 detected_objects_labels.append(label)
 ```
 
-Each detected object along with its label and its point cloud is parsed as a ROS message and `pr2_mover(detected_objects)` is finally used.
+Each detected object along with its label and its point cloud is parsed as a ROS message and `pr2_mover(detected_objects)` is finally used to compare with the pick list, and calculate the centroid of each detected object for correct grasping.
 
 ## Results
 
