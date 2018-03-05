@@ -1,5 +1,13 @@
 ## Project: Perception Pick & Place
 
+[//]: # (Image References)
+
+[image1]: ./misc/figure_1.png
+[image2]: ./misc/figure_2.png
+[image3]: ./misc/world1.png
+[image4]: ./misc/world2.png
+[image5]: ./misc/world3.png
+
 # Required Steps for a Passing Submission:
 1. Extract features and train an SVM model on new objects (see `pick_list_*.yaml` in `/pr2_robot/config/` for the list of models you'll be trying to identify). 
 2. Write a ROS node and subscribe to `/pr2/world/points` topic. This topic contains noisy point cloud data that you must work with.
@@ -44,10 +52,12 @@ Here is an example of how to include an image in your writeup.
 
 #### 1. For all three tabletop setups (`test*.world`), perform object recognition, then read in respective pick list (`pick_list_*.yaml`). Next construct the messages that would comprise a valid `PickPlace` request output them to `.yaml` format.
 
-And here's another image! 
-![demo-2](https://user-images.githubusercontent.com/20687560/28748286-9f65680e-7468-11e7-83dc-f1a32380b89c.png)
+![alt text][image3]
 
-Spend some time at the end to discuss your code, what techniques you used, what worked and why, where the implementation might fail and how you might improve it if you were going to pursue this project further.  
+![alt text][image4]
+
+![alt text][image5]
+ 
 
 
 
