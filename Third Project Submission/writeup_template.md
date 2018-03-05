@@ -48,11 +48,11 @@ Here is an example of how to include an image in your writeup.
 
 
 
-### Pick and Place Setup
+### Results
 
-#### 1. For all three tabletop setups (`test*.world`), perform object recognition, then read in respective pick list (`pick_list_*.yaml`). Next construct the messages that would comprise a valid `PickPlace` request output them to `.yaml` format.
+For each world, a yaml file is extracted containing all the necessary details for the pick and place routine.
 
-World 1 (Recognized objects 3/3)
+World 1 (Yaml File [output_1.yaml](https://github.com/aaman-ee/RoboND/blob/master/Third%20Project%20Submission/output_1.yaml) Recognized objects 3/3)
 
 ![alt text][image3]
 
