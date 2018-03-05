@@ -26,7 +26,7 @@ x = 1.0
 outlier_filter.set_std_dev_mul_thresh(x)
 cloud_filtered = outlier_filter.filter() 
 ```
-Afterwards, a Voxel Grid Downsampling and a PassThrough Filter are applied to work with less data points for time efficiency. I applied two axis filtering for elimination the box outliers
+Afterwards, a Voxel Grid Downsampling and a PassThrough Filter are applied to work with less data points for time efficiency. I applied two axis filtering for elimination of the box outliers
 ```
 vox = cloud_filtered.make_voxel_grid_filter()
 LEAF_SIZE = 0.003
@@ -47,6 +47,35 @@ axis_max = 1.0
 passthrough.set_filter_limits(axis_min, axis_max)
 cloud_filtered = passthrough.filter()
 ```
+A RANSAC Plane Segmentation is then applied for extracting (removing) table
+```
+seg = cloud_filtered.make_segmenter()
+seg.set_model_type(pcl.SACMODEL_PLANE)
+seg.set_method_type(pcl.SAC_RANSAC)
+max_distance = 0.01
+seg.set_distance_threshold(max_distance)
+inliers, coefficients = seg.segment()
+extracted_inliers = cloud_filtered.extract(inliers, negative=False)
+extracted_outliers = cloud_filtered.extract(inliers, negative=True)
+```
+An Euclidean Clustering is applied to the remaining point cloud for extracting the point clouds for each object
+```
+ec.set_ClusterTolerance(0.01)
+ec.set_MinClusterSize(100)
+ec.set_MaxClusterSize(6000)
+```
+We then extract the features of the detected objects and clasify (recognize) the clusters 
+```
+chists = compute_color_histograms(rospcl_cluster, using_hsv=True)
+normals = get_normals(rospcl_cluster)
+nhists = compute_normal_histograms(normals)
+feature = np.concatenate((chists, nhists))
+prediction = clf.predict(scaler.transform(feature.reshape(1,-1)))
+label = encoder.inverse_transform(prediction)[0]
+detected_objects_labels.append(label)
+```
+
+Each detected object along with its label and its point cloud is parsed as a ROS message and `pr2_mover(detected_objects)` is finally used.
 
 ## Results
 
