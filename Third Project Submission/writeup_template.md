@@ -14,7 +14,7 @@ First we train all 8 objects using color and surface normal features. The featur
 
 
 
-![alt text][image1][image2]
+[image1]
 
 
 ## Results
