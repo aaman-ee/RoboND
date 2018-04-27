@@ -80,6 +80,18 @@ Each detected object along with its label and its point cloud is parsed as a ROS
 ## Training
 
 The training was performed in an AWS instance. We uploaded the training/validation/evaluation data through [WinSCP](https://winscp.net/eng/index.php) and enabled the notebook through [PuTTY](https://www.putty.org/).
+After some training and trails we finilized the critical hyperparameters as follows:
+
+```
+learning_rate = 0.001
+batch_size = 64
+num_epochs = 50
+steps_per_epoch = 100
+validation_steps = 50
+workers = 120
+```
+The training curve after 50 epochs is as follows:
+![alt text][image1]
 
 ## Results 
 For the final results, we first run the QuadSim in the Follow me mode, with Spawn people enabled.
