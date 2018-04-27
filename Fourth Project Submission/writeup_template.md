@@ -20,23 +20,23 @@ For building the model we will:
 
   * Create encoder blocks
   
-``
+```
   layer1 = encoder_block(inputs, 64, 2)
   
   layer2 = encoder_block(layer1, 128, 2)
-``
+````
   * Create a 1x1 convolution block
   
-  ``
+  ````
   layer3 = conv2d_batchnorm(layer2, 256, kernel_size=1, strides=1)
-  ``
+  ````
   * Create decoder blocks
  
-  ``
+  ````
   layer4 = decoder_block(layer3, layer1, 128)
   
   layer5 = decoder_block(layer4, inputs, 64)
- ``
+ ````
   
 
 ## Training
