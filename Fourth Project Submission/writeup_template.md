@@ -1,14 +1,14 @@
-# Project: Perception Pick & Place
+# Project: Follow Me
 
 [//]: # (Image References)
 
-[image1]: ./misc/figure_1.png
-[image2]: ./misc/figure_2.png
-[image3]: ./misc/world1.png
-[image4]: ./misc/world2.png
-[image5]: ./misc/world3.png
+[image1]: ./misc/output_19_99.png
+[image2]: ./misc/output_26_0.png
+[image3]: ./misc/output_27_0.png
+[image4]: ./misc/output_28_0.png
+[image5]: ./misc/follow_me.jpg
 
-## Object Recognition Pipeline
+## Network Model
 
 First we extract features from all 8 objects using color and surface normal features. The feature extraction was in the HSV color space for 100 different pose orientations for each object. SVM training for object recognition with linear kernel was utilized. The confusion matrix reveals adequate recognition results.
 
@@ -77,17 +77,17 @@ detected_objects_labels.append(label)
 
 Each detected object along with its label and its point cloud is parsed as a ROS message and `pr2_mover(detected_objects)` is finally used to compare with the pick list, and calculate the centroid of each detected object for correct grasping.
 
-## Results
+## Training
 
 For each world, a yaml file is extracted containing all the necessary details for the pick and place routine.
 
-#### World 1 
+## Results 
 
 Yaml File: [output_1.yaml](https://github.com/aaman-ee/RoboND/blob/master/Third%20Project%20Submission/output_1.yaml)
 
 Recognized objects: 3/3
 
-![alt text][image3]
+![alt text][image5]
 
 #### World 2
 
