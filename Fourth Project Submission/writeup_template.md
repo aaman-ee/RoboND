@@ -92,10 +92,10 @@ workers = 120
 ```
 For the learning rate we chose `0.001` as the best trade off between fast error decrease and avoiding local minima.
 The batch size is the number of training examples to include in a single iteration and was set to 64.
-An epoch is a single pass through all of the training data. The number of epochs sets how many times you would like the network to see each individual image. 50 epochs seem fine since more epochs do not intorduce dramatic enhancements in train and val loss.
+An epoch is a single pass through all of the training data. The number of epochs sets how many times you would like the network to see each individual image. 50 epochs seem fine since more epochs do not introduce dramatic enhancements in train and val loss.
 Steps per epoch define the number of batches we should go through in one epoch. In order to utilize the full training set, it is wise to make sure ``batch_size*steps_per_epoch = number of training`` examples In our case, this is 64*100=6400, so multiple images are seen more than once by the network.
-validation_steps are similar to steps per epoch but for the validation set. The default value provided worked fine.
-This is the number of processes we can start on the CPU/GPU. I used 120 for the AWS.
+The Validation Steps are similar to steps per epoch but for the validation set. The default value provided worked fine.
+Finally, workers define the number of processes we can start on the CPU/GPU. I used 120 for the AWS.
 
 The training curves after 50 epochs is the following:
 
