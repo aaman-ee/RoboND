@@ -41,7 +41,7 @@ For building the model we will:
 
 Upsampling is crucial in the second half of our FCN in order to transform the important features we learned from encoding into the final segmented image in the output. Bilinear Upsampling helps transform our downsampled image back into the resolution of our original input image.
 
-We finally apply our favorite activation function, Softmax, to generate the probability predictions for each of the pixels.
+  * We finally apply our favorite activation function, Softmax, to generate the probability predictions for each of the pixels.
 ````
 return layers.Conv2D(num_classes, 1, activation='softmax', padding='same')(layer5)
 ````
