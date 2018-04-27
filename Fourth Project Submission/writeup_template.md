@@ -7,6 +7,7 @@
 [image3]: ./misc/output_27_0.png
 [image4]: ./misc/output_28_0.png
 [image5]: ./misc/follow_me.jpg
+[image6]: ./misc/model.png
 
 ## Network Model
 
@@ -15,6 +16,7 @@ For a good trade-off between number of parameters and adequate image decoding, w
 ```
 Input > 64 > 128 > 256 > 128 > 64 > Output
 ```
+![alt text][image6]
 
 For building the model we will:
 
