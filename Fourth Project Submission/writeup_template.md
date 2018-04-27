@@ -79,7 +79,7 @@ Each detected object along with its label and its point cloud is parsed as a ROS
 
 ## Training
 
-The training was performed in an AWS instance. We uploaded the training/validation/evaluation data through [WinSCP](https://winscp.net/eng/download.php)
+The training was performed in an AWS instance. We uploaded the training/validation/evaluation data through [WinSCP](https://winscp.net/eng/index.php)
 
 ## Results 
 For the final results, we first run the QuadSim in the Follow me mode, with Spawn people enabled.
