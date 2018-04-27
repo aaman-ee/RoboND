@@ -124,7 +124,7 @@ Through the terminal, we are notified when the target is found, and the quad suc
 ![alt text][image5]
 
 
-The model could be used to recognize and follow other shapes such as cats or dogs, with the equivalent training dataset, however sinc e we had quite many false negatives when the target was far, an even larger set of training and validation images would be damanded. 
+The model could be used to recognize and follow other shapes such as cats or dogs, with the equivalent training dataset, however since we had quite many false negatives when the target was far and considering that cats and dogs are smaller in volume than humans, an even larger set of training and validation images would be demanded. 
 
 
 
