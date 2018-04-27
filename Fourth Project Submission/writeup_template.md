@@ -18,9 +18,9 @@ Input > 64 > 128 > 256 > 128 > 64 > Output
 
 For building the model we will:
 
-⋅⋅*Create an encoder_block
-⋅⋅*Create a decoder_block
-⋅⋅*Build the FCN consisting of encoder blocks, a 1x1 convolution, and decoder blocks.
+  *Create an encoder_block
+  *Create a decoder_block
+  *Build the FCN consisting of encoder blocks, a 1x1 convolution, and decoder blocks.
 
 ## Training
 
