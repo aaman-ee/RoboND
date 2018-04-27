@@ -7,7 +7,7 @@
 [image3]: ./misc/output_27_0.png
 [image4]: ./misc/output_28_0.png
 [image5]: ./misc/follow_me.jpg
-[image6]: ./misc/model.png
+[image6]: ./misc/model2.png
 
 ## Network Model
 
