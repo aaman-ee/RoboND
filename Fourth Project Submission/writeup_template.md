@@ -23,20 +23,21 @@ For building the model we will:
   layer1 = encoder_block(inputs, 64, 2)
   layer2 = encoder_block(layer1, 128, 2)
   ````
+  The encoder's job is to identify the important features in our image, keep those features in memory, remove the noise of other pixels, and decrease the width and height, while increasing layer depth.
+  
   * Create a 1x1 convolution block
   
   ````
   layer3 = conv2d_batchnorm(layer2, 256, kernel_size=1, strides=1)
   ````
+  Since we're attempting to answer the question of WHERE, not just WHAT, we use a 1x1 convolutional layer for the task of semantic segmentation. With a 1x1 convolutional layer we allow different sized input images, instead of being fixed to one size. We decrease dimensions, while preserving spatial information of the image, which allows us to output a segmented image and finally, we add depth to our model and increase parameters at a fairly low computational price.
+  
   * Create decoder blocks
  
   ````
   layer4 = decoder_block(layer3, layer1, 128)
   layer5 = decoder_block(layer4, inputs, 64)
   ````
-The encoder's job is to identify the important features in our image, keep those features in memory, remove the noise of other pixels, and decrease the width and height, while increasing layer depth.
-
-Since we're attempting to answer the question of WHERE, not just WHAT, we use a 1x1 convolutional layer for the task of semantic segmentation. With a 1x1 convolutional layer we allow different sized input images, instead of being fixed to one size. We decrease dimensions, while preserving spatial information of the image, which allows us to output a segmented image and finally, we add depth to our model and increase parameters at a fairly low computational price.
 
 Upsampling is crucial in the second half of our FCN in order to transform the important features we learned from encoding into the final segmented image in the output. Bilinear Upsampling helps transform our downsampled image back into the resolution of our original input image.
 
