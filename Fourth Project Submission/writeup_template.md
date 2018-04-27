@@ -90,8 +90,11 @@ steps_per_epoch = 100
 validation_steps = 50
 workers = 120
 ```
-The training curve after 50 epochs is as follows:
+The training curve after 50 epochs is the following:
+
 ![alt text][image1]
+
+with loss: `0.0142` and val_loss: `0.0253`
 
 ## Results 
 For the final results, we first run the QuadSim in the Follow me mode, with Spawn people enabled.
