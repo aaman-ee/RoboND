@@ -79,7 +79,7 @@ Each detected object along with its label and its point cloud is parsed as a ROS
 
 ## Training
 
-For each world, a yaml file is extracted containing all the necessary details for the pick and place routine.
+The training was performed in an AWS instance. We uploaded the training/validation/evaluation data through [WinSCP](https://winscp.net/eng/download.php)
 
 ## Results 
 For the final results, we first run the QuadSim in the Follow me mode, with Spawn people enabled.
