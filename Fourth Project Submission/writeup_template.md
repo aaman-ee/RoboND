@@ -24,6 +24,7 @@ For building the model we will:
   layer1 = encoder_block(inputs, 64, 2)
   
   layer2 = encoder_block(layer1, 128, 2)
+  
   ``
   * Create a 1x1 convolution block
   
@@ -33,9 +34,11 @@ For building the model we will:
   * Create decoder blocks
   
   ``
+  
   layer4 = decoder_block(layer3, layer1, 128)
   
   layer5 = decoder_block(layer4, inputs, 64)
+  
   ``
   
 
