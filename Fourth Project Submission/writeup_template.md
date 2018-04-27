@@ -103,6 +103,8 @@ Some examples are listed below:
 ![alt text][image3]
 ![alt text][image4]
 
+The final grade score reached ``44.6%`` meeting the pass criteria of the project.
+
 ## Results 
 For the final results, we first run the QuadSim in the Follow me mode, with Spawn people enabled.
 Afterwards, the trained model along with its weights are loaded in the conda environment, and we set the Quad in following mode.
