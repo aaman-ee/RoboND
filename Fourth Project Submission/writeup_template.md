@@ -80,7 +80,7 @@ Each detected object along with its label and its point cloud is parsed as a ROS
 ## Training
 
 The training was performed in an AWS instance. We uploaded the training/validation/evaluation data through [WinSCP](https://winscp.net/eng/index.php) and enabled the notebook through [PuTTY](https://www.putty.org/).
-After some training and trails we finilized the critical hyperparameters as follows:
+After some training and trails we finalized the critical hyperparameters as follows:
 
 ```
 learning_rate = 0.001
@@ -95,6 +95,13 @@ The training curve after 50 epochs is the following:
 ![alt text][image1]
 
 with loss: `0.0142` and val_loss: `0.0253`
+
+We evaluated the trained network in the evaluation dataset to see how well the network can detect the hero from a distance, how often the network makes a mistake and identifies the wrong person as the target, and how well the network can identify the target while following it.
+Some examples are listed below:
+
+![alt text][image2]
+![alt text][image3]
+![alt text][image4]
 
 ## Results 
 For the final results, we first run the QuadSim in the Follow me mode, with Spawn people enabled.
