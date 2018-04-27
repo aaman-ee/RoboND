@@ -82,17 +82,13 @@ Each detected object along with its label and its point cloud is parsed as a ROS
 For each world, a yaml file is extracted containing all the necessary details for the pick and place routine.
 
 ## Results 
-For the final resutls, we first run the QuadSim in the Follow me mode, with Spawn people enabled.
-Afterward, the trained model along with its weights are loaded in the conda environment, and we set the Quad in following mode.
+For the final results, we first run the QuadSim in the Follow me mode, with Spawn people enabled.
+Afterwards, the trained model along with its weights are loaded in the conda environment, and we set the Quad in following mode.
 ````
 python follower.py --pred_viz model_weights.h5
 ````
 Through the terminal, we are notified when the target is found, and the quad succesfully follows the target, even with other people visible. 
 
-
-Yaml File: [output_1.yaml](https://github.com/aaman-ee/RoboND/blob/master/Third%20Project%20Submission/output_1.yaml)
-
-Recognized objects: 3/3
 
 ![alt text][image5]
 
