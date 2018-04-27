@@ -90,11 +90,18 @@ steps_per_epoch = 100
 validation_steps = 50
 workers = 120
 ```
-The training curve after 50 epochs is the following:
+For the learning rate we chose `0.001` as the best trade off between fast error decrease and avoiding local minima.
+The batch size is the number of training examples to include in a single iteration and was set to 64.
+An epoch is a single pass through all of the training data. The number of epochs sets how many times you would like the network to see each individual image. 50 epochs seem fine since more epochs do not intorduce dramatic enhancements in train and val loss.
+Steps per epoch define the number of batches we should go through in one epoch. In order to utilize the full training set, it is wise to make sure ``batch_size*steps_per_epoch = number of training`` examples In our case, this is 64*100=6400, so multiple images are seen more than once by the network.
+validation_steps are similar to steps per epoch but for the validation set. The default value provided worked fine.
+This is the number of processes we can start on the CPU/GPU. I used 120 for the AWS.
+
+The training curves after 50 epochs is the following:
 
 ![alt text][image1]
 
-with loss: `0.0142` and val_loss: `0.0253`
+with train loss: `0.0142` and validation loss: `0.0253`
 
 We evaluated the trained network in the evaluation dataset to see how well the network can detect the hero from a distance, how often the network makes a mistake and identifies the wrong person as the target, and how well the network can identify the target while following it.
 Some examples are listed below:
