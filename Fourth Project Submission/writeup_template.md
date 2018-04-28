@@ -27,6 +27,8 @@ For building the model we will:
   ````
   The encoder's job is to identify the important features in our image, keep those features in memory, remove the noise of other pixels, and decrease the width and height, while increasing layer depth. The encoder block harnesses the ``separable_conv2d_batchnorm()``, which defaults to a kernel size of 3x3, and same padding(zeros at the edges). 
   
+ The first two layers are in charge of determining the important features for extracting from our input image, we chose strides=2, and the number of filters to be a power of 2: ``2**6=64`` for the first layer and ``2**7=128`` for the second one. This choice of ``strides=2`` allows us to lose some dimensionality in height and width for the subsequent layer, and helps our memory and computational time. 
+  
   * Create a 1x1 convolution block
   
   ````
