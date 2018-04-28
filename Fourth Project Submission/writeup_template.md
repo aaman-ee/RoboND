@@ -25,14 +25,14 @@ For building the model we will:
   layer1 = encoder_block(inputs, 64, 2)
   layer2 = encoder_block(layer1, 128, 2)
   ````
-  The encoder's job is to identify the important features in our image, keep those features in memory, remove the noise of other pixels, and decrease the width and height, while increasing layer depth.
+  The encoder's job is to identify the important features in our image, keep those features in memory, remove the noise of other pixels, and decrease the width and height, while increasing layer depth. The encoder block harnesses the ``separable_conv2d_batchnorm()``, which defaults to a kernel size of 3x3, and same padding(zeros at the edges). 
   
   * Create a 1x1 convolution block
   
   ````
   layer3 = conv2d_batchnorm(layer2, 256, kernel_size=1, strides=1)
   ````
-  Since we're attempting to answer the question of WHERE, not just WHAT, we use a 1x1 convolutional layer for the task of semantic segmentation. With a 1x1 convolutional layer we allow different sized input images, instead of being fixed to one size. We decrease dimensions, while preserving spatial information of the image, which allows us to output a segmented image and finally, we add depth to our model and increase parameters at a fairly low computational price.
+  Since we're attempting to answer the question of WHERE, not just WHAT, we use a 1x1 convolutional layer for the task of semantic segmentation. With a 1x1 convolutional layer we allow different sized input images, instead of being fixed to one size. We decrease dimensions, while preserving spatial information of the image, which allows us to output a segmented image and finally, we add depth to our model and increase parameters at a fairly low computational price. In contast with the conventional methods for the task of Image classification a CNN would end with a fully connected 1x1 layer that would output a vector of c classes, each assigned a probability between 0-1 where the entire vector sums to 1. But since we want semantic segmentation we use a 1x1 convolutional layer which allows us to assign individual pixels to one of the three classes.
   
   * Create decoder blocks
  
