@@ -48,6 +48,10 @@ Upsampling is crucial in the second half of our FCN in order to transform the im
 return layers.Conv2D(num_classes, 1, activation='softmax', padding='same')(layer5)
 ````
 
+  * More Details of the used model
+  
+We use ``bilinear_upsample()`` in the decoder for the upsampling layer. Bilinear is a simple and fast upsampling method which uses the weighted average of four nearest pixels to estimate a new pixel value. It is used in the decoder block to upsample the input to the larger layer.
+
 ## Training
 
 The training was performed in an AWS instance. We uploaded the training/validation/evaluation data through [WinSCP](https://winscp.net/eng/index.php) and enabled the notebook through [PuTTY](https://www.putty.org/).
