@@ -47,10 +47,15 @@ Upsampling is crucial in the second half of our FCN in order to transform the im
 ````
 return layers.Conv2D(num_classes, 1, activation='softmax', padding='same')(layer5)
 ````
+This final layer will be the same height and width of the input image, and will be ``num_classes`` deep. In our example, we have 3 classes because we are aiming to assign our pixels into one of the three classes (red(background), blue(hero) or green(non hero person)).
 
   * More Details of the used model
   
 We use ``bilinear_upsample()`` in the decoder for the upsampling layer. Bilinear is a simple and fast upsampling method which uses the weighted average of four nearest pixels to estimate a new pixel value. It is used in the decoder block to upsample the input to the larger layer.
+
+We used also ``batch normalization`` because the network can be  trained faster since convergence is quicker, resulting in overall performance improvement. Batch normalization also allows higher learning rates, since the normalization helps gradient descent to converge more quickly. Batch normalization adds some noise to the network, but works as well as dropout in improving performance/
+
+The used ``separable convolution``  is necessary for reducing the number of parameters. The reduction in the parameters improves runtime performance. Separable convolution layers also reduce overfitting due to fewer parameters.
 
 ## Training
 
